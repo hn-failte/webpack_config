@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    
 </body>
+<% for (var chunk in htmlWebpackPlugin.files.chunks) { %><script type="text/javascript" charset="UTF-8" src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script><% } %>
 </html>

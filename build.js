@@ -2,7 +2,7 @@ const Webpack = require('webpack')
 const ora = require('ora')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const DevServer = require('webpack-dev-server')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const spinner = ora('building')
 const startTime = new Date().toLocaleTimeString()
 
@@ -11,6 +11,14 @@ spinner.start()
 Webpack({
   mode: 'development',
   devtool: '#@source-map',
+  devServer: {
+    host: 'localhost',
+    open: 'Google Chrome',
+    openPage: 'dev/htmls/index.html',
+    publicPath: '/dev/',
+    devtool: '@#cheap-module-eval-source-map',
+    port: 10086
+  },
   entry: ['./main.js'],
   output: {
       path: path.resolve(process.cwd(), './dist'),
@@ -21,9 +29,16 @@ Webpack({
       'flag': true,
       'name': '"del"'
     }),
-    new HtmlWebpackPlugin()
-  ]
+    new HtmlWebpackPlugin(),
+    new UglifyJSPlugin({
+      test: /\.js($|\?)/i,
+      cache: true,
+      parallel: true
+    })
+  ],
+  bail: true
 }, (error, stats) => {
+  if(error) throw error;
   spinner.stop()
   console.log(stats.toString({
     colors: true

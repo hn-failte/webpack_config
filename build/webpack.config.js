@@ -1,6 +1,7 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     entry: ['./src/index.js'],
@@ -10,15 +11,15 @@ module.exports = {
         publicPath: '../javascript'
     },
     devtool: '@#source-map',
-    devServer: {
-        port: 10086,
-        open: 'Firefox',
-        openPage: '/index.html'
-    },
     plugins: [
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../dist/html/index.html')
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        // new UglifyJSPlugin({
+        //   test: /\.js($|\?)/i,
+        //   cache: true,
+        //   parallel: true
+        // })
     ]
 }
