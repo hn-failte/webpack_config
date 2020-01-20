@@ -3,7 +3,7 @@ import '../assets/styles/footer.styl'
 export default {
     data() {
         return {
-            author: 'xing.hx'
+            author: '<hn-failte>(failte@163.com)'
         }
     },
     render() {
