@@ -2,24 +2,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: ['./src/index.js'],
-    output: {
-        filename: 'app.[hash:8].js'
-    },
     module: {
         rules: [
-            {
-                enforce: 'pre',
-                test: /\.(js|vue)$/i,
-                exclude: /node_modules/i,
-                use: {
-                    loader: 'eslint-loader',
-                    options: {
-                        cache: true,
-                        emitError: true,
-                        emitWarning: false
-                    }
-                }
-            },
             {
                 test: /\.vue$/i,
                 use: 'vue-loader'

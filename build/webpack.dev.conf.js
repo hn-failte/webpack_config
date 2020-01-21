@@ -8,7 +8,6 @@ module.exports = {
         filename: 'javascript/app.js',
         publicPath: '/dev/'
     },
-    // devtool: '@#cheap-module-eval-source-map',
     devtool: '@#eval',
     devServer: {
         host: 'localhost', // 访问域名
@@ -24,6 +23,7 @@ module.exports = {
         openPage: 'dev/html/index.html', // 自动打开页面
         progress: true, // 显示模块加载进度
         quiet: false, // 安静模式，除启动信息外的信息不打印，错误和警告不会打印
+        overlay: true, // 报错时用错误覆盖html
         compress: true, // gzip模式
         watchOptions: {
             poll: false // 观察间隔
@@ -34,6 +34,21 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                enforce: 'pre', // 该项会使得检测在babel编译前执行
+                test: /\.(js|vue)$/i,
+                exclude: /node_modules/i,
+                use: {
+                    loader: 'eslint-loader',
+                    options: {
+                        cache: true,
+                        emitError: true,
+                        emitWarning: false,
+                        failOnError: true,
+                        formatter: require('eslint-friendly-formatter') // 输出格式化
+                    }
+                }
+            },
             {
                 test: /\.(jpe?g|png|gif|svg|webp)$/i,
                 use: {
