@@ -1,10 +1,13 @@
-const Webpack = require('webpack')
-const Config = require('./webpack.config')
+const WebpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.base.conf')
+const prodConfig = require('./webpack.prod.conf')
+const devConfig = require('./webpack.dev.conf')
 
-Webpack(Config, (err, stats) => {
-    if(err) throw err;
-    console.log(stats.toString({
-        colors: true,
-        warnings: false
-    }))
-})
+const prodMode = process.env.NODE_ENV.indexOf('production') > -1
+const devMode = process.env.NODE_ENV.indexOf('development') > -1
+
+const Config = WebpackMerge(baseConfig, prodMode ? prodConfig : devMode ? devConfig : {})
+
+require('fs').writeFileSync(require('path').resolve(__dirname, 'webpack.config.json'), JSON.stringify(Config, false, '\t'))
+
+module.exports = Config

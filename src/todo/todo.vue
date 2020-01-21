@@ -48,7 +48,6 @@
                 todos: [],
                 filter: 'all'
             }
-
         },
 
         // 计算
@@ -58,10 +57,8 @@
                     return this.todos;
                 }
                 const completed = this.filter === 'completed';
-
                 // 将todos数组中，completed为true的值过滤出来，并返回一个新数组
                 return this.todos.filter(todo => completed === todo.completed);
-
             }
         },
 
