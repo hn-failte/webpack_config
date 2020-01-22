@@ -1,11 +1,13 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: 'production',
     output: {
         filename: 'app.[hash:8].js',
+        chunkFilename: '[id].[hash:8].js',
         path: path.resolve(__dirname, '../dist/javascript')
     },
     devtool: '@#source-map',
@@ -50,6 +52,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../index.html'),
             filename: path.resolve(__dirname, '../dist/html/index.html')
+        }),
+        new MiniCssExtractPlugin({
+            filename: '../css/main.[hash:8].css', // 文件名
+            chunkFilename: '../css/[id].[chunkhash:8].css', // 块文件名
+            ignoreOrder: false, // 忽略顺序
         }),
         new CleanWebpackPlugin()
     ]

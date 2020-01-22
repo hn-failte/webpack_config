@@ -1,6 +1,7 @@
 const path = require('path')
 const { HotModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: 'development',
@@ -86,6 +87,13 @@ module.exports = {
             template: path.resolve(__dirname, '../index.html'),
             filename: 'html/index.html'
         }),
-        new HotModuleReplacementPlugin()
+        new HotModuleReplacementPlugin(),
+        new MiniCssExtractPlugin({
+            hmr: true, // 热更新
+            filename: 'css/main.[hash:8].css',
+            chunkFilename: 'css/[name].[chunkhash:8].css',
+            publicPath: '/dev/',
+            ignoreOrder: false // 忽略顺序
+        })
     ]
 }

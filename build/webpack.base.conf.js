@@ -1,9 +1,25 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const path = require('path')
 
 module.exports = {
     entry: ['./src/index.js'],
     module: {
         rules: [
+            {
+                test: /\.(css|styl(us)?)$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [require('autoprefixer')]
+                        }
+                    },
+                    'stylus-loader'
+                ]
+            },
             {
                 test: /\.vue$/i,
                 use: 'vue-loader'
@@ -17,25 +33,15 @@ module.exports = {
                         presets: ['@babel/preset-env', '@vue/babel-preset-jsx']
                     }
                 }
-            },
-            {
-                test: /\.(css|styl(us)?)$/i,
-                use: [
-                    'vue-style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [require('autoprefixer')]
-                        }
-                    },
-                    'stylus-loader'
-                ]
             }
         ]
     },
     resolve: {
-        extensions: ['.js', '.jsx', 'vue']
+        extensions: ['.js', 'json', 'vue', '.jsx'],
+        alias: {
+            'vue$': 'vue/dist/vue.runtime.esm.js',
+            '@': path.resolve(__dirname, '../src/')
+        }
     },
     plugins: [
         new VueLoaderPlugin()
