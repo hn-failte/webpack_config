@@ -37,8 +37,8 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.js', 'json', 'vue', '.jsx'],
-        alias: {
+        extensions: ['.js', 'json', 'vue', '.jsx'], // 解析扩展名
+        alias: { // 别名解析
             'vue$': 'vue/dist/vue.runtime.esm.js',
             '@': path.resolve(__dirname, '../src/')
         }
@@ -46,12 +46,16 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin()
     ],
-    stats: {
+    stats: { // 输出格式化
         colors: true,
-        warnings: false
-    }
-    // { all?, assets?, assetsSort?, builtAt?, cached?, cachedAssets?, children?, chunkGroups?, chunkModules?, chunkOrigins?, chunks?, chunksSort?,
-    // colors?, context?, depth?, entrypoints?, env?, errorDetails?, errors?, exclude?, excludeAssets?, excludeModules?, hash?, logging?,
-    // loggingDebug?, loggingTrace?, maxModules?, moduleAssets?, moduleTrace?, modules?, modulesSort?, nestedModules?, optimizationBailout?,
-    // outputPath?, performance?, providedExports?, publicPath?, reasons?, source?, timings?, usedExports?, version?, warnings?, warningsFilter? }
+        modules: false,
+        chunks: false,
+        chunkModules: false,
+        children: false
+    },
+    performance: {
+        hints: 'warning', // 文件过大时警告，默认警告
+        assetFilter: filename => /\.js$/i.test(filename) // 对指定类型的输出文件大小进行检测，默认会检测非map文件，这里只指定js文件
+    },
+    bail: true // 在第一个错误出现时抛出失败结果
 }
