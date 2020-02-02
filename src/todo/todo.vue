@@ -4,7 +4,7 @@
                class="add-input"
                autofocus="autofocus"
                placeholder="接下来要做什么?"
-               @keyup.enter="addTodo"
+               @keyup.enter="addTodo|debounce"
         >
 
         <!-- 使用items组件 -->

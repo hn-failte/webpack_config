@@ -54,8 +54,10 @@ module.exports = {
         children: false
     },
     performance: {
-        hints: 'warning', // 文件过大时警告，默认警告
-        assetFilter: filename => /\.js$/i.test(filename) // 对指定类型的输出文件大小进行检测，默认会检测非map文件，这里只指定js文件
+        hints: false, // 文件过大时警告，默认warning
+        assetFilter: filename => filename.endsWith('.js'), // 对指定类型的输出文件大小进行检测，默认会检测非map文件，这里只指定js文件
+        maxEntrypointSize: 250000, // 入口，单位：bytes，默认250000
+        maxAssetSize: 1024000 // 出口，单位：bytes，默认250000
     },
     bail: true // 在第一个错误出现时抛出失败结果
 }
