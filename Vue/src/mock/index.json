@@ -1,0 +1,14 @@
+{
+  "cn": {
+    "name": "姓名",
+    "age": "年龄",
+    "changeEN": "切换为英语",
+    "changeCN": "切换为中文"
+  },
+  "en": {
+    "name": "Name",
+    "age": "Age",
+    "changeEN": "Change To EN",
+    "changeCN": "Change To CN"
+  }
+}

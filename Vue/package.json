@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "yarn dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build",
     "dev:analyzer": "cross-env NODE_ENV=development analyzer=true webpack-dev-server --config build",
     "build": "cross-env NODE_ENV=production npx webpack --config build",

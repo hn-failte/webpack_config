@@ -5,16 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        body{
-            --failte-bule: blue;
-        }
-        div{
-            color: var(--failte-bule)
-        }
-    </style>
 </head>
 <body>
+    <div id="root"></div>
 </body>
 <% for (var chunk in htmlWebpackPlugin.files.chunks) { %><script type="text/javascript" charset="UTF-8" src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script><% } %>
 </html>

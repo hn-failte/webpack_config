@@ -10,7 +10,12 @@ module.exports = {
                 test: /\.(css|styl(us)?)$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    },
                     {
                         loader: 'postcss-loader',
                         options: {
@@ -59,5 +64,5 @@ module.exports = {
         maxEntrypointSize: 250000, // 入口，单位：bytes，默认250000
         maxAssetSize: 1024000 // 出口，单位：bytes，默认250000
     },
-    bail: true // 在第一个错误出现时抛出失败结果
+    bail: false // 在第一个错误出现时抛出失败结果
 }

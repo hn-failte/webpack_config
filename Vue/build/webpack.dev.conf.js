@@ -27,7 +27,7 @@ module.exports = {
         overlay: true, // 报错时用错误覆盖html
         compress: true, // gzip模式
         watchOptions: {
-            poll: false // 观察间隔
+            poll: 5 // 观察间隔
         },
         clientLogLevel: 'warning',
         proxy: { // 代理服务器
@@ -90,8 +90,8 @@ module.exports = {
         new HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
             hmr: true, // 热更新
-            filename: 'css/main.[hash:8].css',
-            chunkFilename: 'css/[name].[chunkhash:8].css',
+            filename: 'css/main.css',
+            chunkFilename: 'css/[name].css',
             publicPath: '/dev/',
             ignoreOrder: false // 忽略顺序
         })
